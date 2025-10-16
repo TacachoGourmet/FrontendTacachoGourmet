@@ -39,28 +39,28 @@ const menuItems: MenuItem[] = [
     name: "Tacacho Mix de Carne",
     description: "Deliciosa combinación de carne de res, pollo y pescado con plátano verde machacado y masato cremoso",
     price: 28000,
-    image: "/tacacho-mix-carne-plato-tradicional-amazonico.jpg",
+    image: "/tacacho-with-mixed-meats-beef-chicken-fish-colorfu.jpg",
   },
   {
     id: "champinones",
     name: "Tacacho de Champiñones",
     description: "Exquisita variación vegetariana con champiñones frescos, plátano verde y nuestra salsa especial",
     price: 24000,
-    image: "/tacacho-champinones-plato-vegetariano-amazonico.jpg",
+    image: "/tacacho-with-fresh-mushrooms-herbs-vegetarian-amaz.jpg",
   },
   {
     id: "ranchero",
     name: "Tacacho Ranchero",
     description: "Estilo campesino con carne de cerdo, chorizo criollo y el auténtico sabor de la selva",
     price: 26000,
-    image: "/tacacho-ranchero-carne-cerdo-chorizo-amazonico.jpg",
+    image: "/tacacho-ranchero-style-with-marinated-beef-fresh-v.jpg",
   },
   {
     id: "vegetariano",
     name: "Tacacho Vegetariano",
     description: "Opción 100% vegetal con verduras frescas, quinoa y nuestro masato especial sin lácteos",
     price: 22000,
-    image: "/tacacho-vegetariano-verduras-quinoa-amazonico.jpg",
+    image: "/vegetarian-tacacho-with-seasonal-vegetables-legume.jpg",
   },
 ]
 
