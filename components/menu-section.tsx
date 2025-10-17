@@ -1,6 +1,10 @@
+"use client"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { useState } from "react"
+
 
 const menuItems = [
   {
@@ -8,17 +12,17 @@ const menuItems = [
     name: "Tacacho Mix de Carne",
     description:
       "Combinación exclusiva de carne de res, pollo y pescado con láminas crocantes de nabos sobre base de masato cremoso.",
-    price: "$18.99",
+    price: "$24.000",
     image: "/tacacho-with-mixed-meats-beef-chicken-fish-colorfu.jpg",
     badge: "Más Popular",
     badgeColor: "bg-secondary",
   },
   {
     id: 2,
-    name: "Tacacho de Champiñones",
+    name: "Tacacho de Camarones",
     description:
-      "Deliciosa variación vegetariana con champiñones frescos, hierbas aromáticas y nuestra tradicional base de masato.",
-    price: "$15.99",
+      "Deliciosa variación con camarones frescos, hierbas aromáticas y nuestra tradicional base de masato.",
+    price: "$26.000",
     image: "/tacacho-with-fresh-mushrooms-herbs-vegetarian-amaz.jpg",
     badge: "Vegetariano",
     badgeColor: "bg-green-500",
@@ -28,7 +32,7 @@ const menuItems = [
     name: "Tacacho Ranchero",
     description:
       "Estilo ranchero con carne de res marinada, vegetales frescos y especias tradicionales de la región amazónica.",
-    price: "$17.99",
+    price: "$24.000",
     image: "/tacacho-ranchero-style-with-marinated-beef-fresh-v.jpg",
     badge: "Tradicional",
     badgeColor: "bg-primary",
@@ -38,7 +42,7 @@ const menuItems = [
     name: "Tacacho Vegetariano",
     description:
       "Opción completamente vegetal con vegetales de temporada, legumbres y nuestra base cremosa de masato vegano.",
-    price: "$14.99",
+    price: "$22.000",
     image: "/vegetarian-tacacho-with-seasonal-vegetables-legume.jpg",
     badge: "Vegano",
     badgeColor: "bg-green-600",
@@ -46,6 +50,13 @@ const menuItems = [
 ]
 
 export function MenuSection() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const goToOrders = () => {
+    window.location.href = "/pedidos"
+    setIsMenuOpen(false)
+  }
+
   return (
     <section id="menu" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -71,17 +82,17 @@ export function MenuSection() {
                 </div>
                 <CardDescription className="text-muted-foreground text-pretty">{item.description}</CardDescription>
               </CardHeader>
-              <CardContent>
+              {/* <CardContent>
                 <Button className="w-full bg-primary hover:bg-secondary/90 text-secondary-foreground">
                   Agregar al Pedido
                 </Button>
-              </CardContent>
+              </CardContent> */}
             </Card>
           ))}
         </div>
 
         <div className="text-center mt-12">
-          <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground px-8 py-3">
+          <Button onClick={goToOrders} size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground px-8 py-3">
             Ver Menú Completo
           </Button>
         </div>
