@@ -59,7 +59,7 @@ export function Header() {
             >
               Equipo
             </button>
-            <Button onClick={goToOrders} className="bg-primary hover:bg-primary/90 text-primary-foreground">
+            <Button onClick={goToOrders} className="bg-primary hover:bg-secondary/90 text-primary-foreground">
               Pedir Ahora
             </Button>
           </nav>

@@ -33,7 +33,7 @@ export function Hero() {
               >
                 Descubre el Auténtico
                 <motion.span
-                  className="text-primary block"
+                  className="text-accent block"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.5 }}
@@ -65,7 +65,7 @@ export function Hero() {
               >
                 <Button
                   size="lg"
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 text-lg"
+                  className="bg-secondary hover:bg-secondary/90 text-secondary-foreground px-8 py-3 text-lg"
                   onClick={() =>
                     document
                       .getElementById("menu")
@@ -83,7 +83,7 @@ export function Hero() {
                   asChild
                   variant="outline"
                   size="lg"
-                  className="border-primary text-primary hover:bg-primary hover:text-primary-foreground px-8 py-3 text-lg bg-transparent"
+                  className="border-primary text-primary hover:bg-secondary hover:text-secondary-foreground px-8 py-3 text-lg bg-transparent"
                 >
                   <Link href="/pedidos">Pedir Ahora</Link>
                 </Button>
@@ -114,7 +114,7 @@ export function Hero() {
                 whileHover={{ scale: 1.02 }}
               />
               <motion.div
-                className="absolute -top-6 -right-6 bg-gradient-to-r from-secondary to-secondary/80 text-secondary-foreground px-6 py-3 rounded-full font-bold shadow-xl animate-pulse border-2 border-white"
+                className="absolute -top-6 -right-6 bg-gradient-to-r from-[var(--highlight)] to-[var(--highlight)]/80 text-[var(--highlight-foreground)] px-6 py-3 rounded-full font-bold shadow-xl animate-pulse border-2 border-white"
                 initial={{ opacity: 0, scale: 0, rotate: -180 }}
                 animate={{ opacity: 1, scale: 1, rotate: 0 }}
                 transition={{
@@ -125,7 +125,7 @@ export function Hero() {
                 }}
               >
                 <span className="text-lg">¡Nuevo!</span>
-                <div className="absolute -inset-1 bg-gradient-to-r from-secondary to-secondary/60 rounded-full blur opacity-30 animate-pulse"></div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-[var(--highlight)] to-[var(--highlight)]/60 rounded-full blur opacity-30 animate-pulse"></div>
               </motion.div>
 
               {/* Elementos decorativos animados */}
@@ -133,11 +133,9 @@ export function Hero() {
                 className="absolute -bottom-4 -left-4 w-20 h-20 bg-primary/20 rounded-full blur-xl"
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{
-                  opacity: 1,
-                  scale: 1,
                   // Animation loop
                   scale: [1, 1.2, 1],
-                  opacity: [0.3, 0.6, 0.3],
+                  opacity: [0.3, 0.5, 0.3],
                 }}
                 transition={{
                   duration: 3,
@@ -149,14 +147,13 @@ export function Hero() {
               <motion.div
                 className="absolute -top-8 left-1/3 w-16 h-16 bg-secondary/20 rounded-full blur-lg"
                 initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 1.2 }}
                 animate={{
                   scale: [1, 1.1, 1],
                   opacity: [0.2, 0.5, 0.2],
                 }}
                 transition={{
                   duration: 4,
+                  delay: 1.2,
                   repeat: Infinity,
                   repeatType: "reverse",
                 }}

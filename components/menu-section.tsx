@@ -72,7 +72,7 @@ export function MenuSection() {
                 <CardDescription className="text-muted-foreground text-pretty">{item.description}</CardDescription>
               </CardHeader>
               <CardContent>
-                <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+                <Button className="w-full bg-primary hover:bg-secondary/90 text-secondary-foreground">
                   Agregar al Pedido
                 </Button>
               </CardContent>

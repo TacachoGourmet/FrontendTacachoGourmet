@@ -36,11 +36,11 @@ function ValueCard({ icon: Icon, title, description, className = "" }: {
 }) {
   return (
     <div className={`max-w-[280px] ${className}`}>
-      <div className="p-6 rounded-xl bg-white/70 backdrop-blur-md shadow-xl border border-primary/30 hover:bg-white/90 hover:shadow-2xl hover:scale-105 transition-all duration-300 group cursor-pointer">
-        <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary to-primary/80 text-primary-foreground rounded-full mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+      <div className="p-6 rounded-xl bg-white/70 backdrop-blur-md shadow-xl border border-primary hover:bg-white/90 hover:shadow-2xl hover:scale-105 transition-all duration-300 group cursor-pointer">
+        <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-secondary to-secondary/80 text-secondary-foreground rounded-full mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
           <Icon size={24} />
         </div>
-        <h3 className="text-lg font-bold text-foreground mb-2 leading-tight">
+        <h3 className="text-lg font-bold text-primary mb-2 leading-tight">
           {title}
         </h3>
         <p className="text-sm text-muted-foreground leading-relaxed">

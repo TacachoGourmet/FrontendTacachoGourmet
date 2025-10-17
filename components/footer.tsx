@@ -3,7 +3,7 @@ import { Facebook, Instagram, Twitter, Youtube } from "lucide-react"
 
 export function Footer() {
   return (
-    <footer className="bg-foreground text-background py-12">
+    <footer className="bg-footer text-background py-12">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo y Descripción */}
@@ -17,7 +17,7 @@ export function Footer() {
                 className="rounded-full"
               />
               <div>
-                <h3 className="text-xl font-bold">Tacacho Gourmet</h3>
+                <h3 className="text-xl font-bold text-primary">Tacacho Gourmet</h3>
                 <p className="text-sm text-background/80">Sabor Exquisito</p>
               </div>
             </div>
@@ -29,25 +29,25 @@ export function Footer() {
 
           {/* Enlaces Rápidos */}
           <div>
-            <h4 className="font-semibold mb-4">Enlaces Rápidos</h4>
+            <h4 className="font-semibold mb-4 text-primary">Enlaces Rápidos</h4>
             <ul className="space-y-2 text-background/80">
               <li>
-                <a href="#inicio" className="hover:text-background transition-colors">
+                <a href="#inicio" className="hover:text-primary transition-colors">
                   Inicio
                 </a>
               </li>
               <li>
-                <a href="#menu" className="hover:text-background transition-colors">
+                <a href="#menu" className="hover:text-primary transition-colors">
                   Menú
                 </a>
               </li>
               <li>
-                <a href="#nosotros" className="hover:text-background transition-colors">
+                <a href="#nosotros" className="hover:text-primary transition-colors">
                   Nosotros
                 </a>
               </li>
               <li>
-                <a href="#contacto" className="hover:text-background transition-colors">
+                <a href="#contacto" className="hover:text-primary transition-colors">
                   Contacto
                 </a>
               </li>
@@ -56,18 +56,18 @@ export function Footer() {
 
           {/* Redes Sociales */}
           <div>
-            <h4 className="font-semibold mb-4">Síguenos</h4>
+            <h4 className="font-semibold mb-4 text-primary">Síguenos</h4>
             <div className="flex space-x-4">
-              <a href="#" className="text-background/80 hover:text-background transition-colors">
+              <a href="#" className="text-background/80 hover:text-primary transition-colors">
                 <Facebook size={24} />
               </a>
-              <a href="#" className="text-background/80 hover:text-background transition-colors">
+              <a href="#" className="text-background/80 hover:text-primary transition-colors">
                 <Instagram size={24} />
               </a>
-              <a href="#" className="text-background/80 hover:text-background transition-colors">
+              <a href="#" className="text-background/80 hover:text-primary transition-colors">
                 <Twitter size={24} />
               </a>
-              <a href="#" className="text-background/80 hover:text-background transition-colors">
+              <a href="#" className="text-background/80 hover:text-primary transition-colors">
                 <Youtube size={24} />
               </a>
             </div>
