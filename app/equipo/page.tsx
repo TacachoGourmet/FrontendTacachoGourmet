@@ -1,12 +1,13 @@
-import { OrderSystem } from "@/components/order-system"
 import { Header } from "@/components/header"
+import { TeamSection } from "@/components/team-section"
 import { Footer } from "@/components/footer"
 
-export default function PedidosPage() {
+
+export default function EquipoPage() {
   return (
     <>
       <Header />
-      <OrderSystem />
+      <TeamSection />
       <Footer />
     </>
   )

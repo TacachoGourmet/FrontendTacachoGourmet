@@ -5,6 +5,10 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 export function Hero() {
+    const goToOrders = () => {
+    window.location.href = "/pedidos"
+    }
+
   return (
     <section
       id="inicio"
@@ -66,26 +70,9 @@ export function Hero() {
                 <Button
                   size="lg"
                   className="bg-secondary hover:bg-secondary/90 text-secondary-foreground px-8 py-3 text-lg"
-                  onClick={() =>
-                    document
-                      .getElementById("menu")
-                      ?.scrollIntoView({ behavior: "smooth" })
-                  }
+                  onClick={goToOrders}
                 >
-                  Ver Nuestro Menú
-                </Button>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  className="border-primary text-primary hover:bg-secondary hover:text-secondary-foreground px-8 py-3 text-lg bg-transparent"
-                >
-                  <Link href="/pedidos">Pedir Ahora</Link>
+                  Ver Nuestro menú 
                 </Button>
               </motion.div>
             </motion.div>

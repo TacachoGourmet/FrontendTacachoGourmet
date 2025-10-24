@@ -14,12 +14,14 @@ interface MenuItem {
   id: string
   name: string
   description: string
-  price: number
+  priceSmall: number
+  priceLarge: number
   image: string
 }
 
 interface CartItem extends MenuItem {
   quantity: number
+  size: "small" | "large"
   notes?: string
 }
 
@@ -38,28 +40,32 @@ const menuItems: MenuItem[] = [
     id: "mix-carne",
     name: "Tacacho Mix de Carne",
     description: "Deliciosa combinación de carne de res, pollo y pescado con plátano verde machacado y masato cremoso",
-    price: 28000,
+    priceSmall: 24000,
+    priceLarge: 32000,
     image: "/tacacho-with-mixed-meats-beef-chicken-fish-colorfu.jpg",
   },
   {
     id: "champinones",
     name: "Tacacho de Champiñones",
     description: "Exquisita variación vegetariana con champiñones frescos, plátano verde y nuestra salsa especial",
-    price: 24000,
+    priceSmall: 20000,
+    priceLarge: 28000,
     image: "/tacacho-with-fresh-mushrooms-herbs-vegetarian-amaz.jpg",
   },
   {
     id: "ranchero",
     name: "Tacacho Ranchero",
     description: "Estilo campesino con carne de cerdo, chorizo criollo y el auténtico sabor de la selva",
-    price: 26000,
+    priceSmall: 22000,
+    priceLarge: 30000,
     image: "/tacacho-ranchero-style-with-marinated-beef-fresh-v.jpg",
   },
   {
     id: "vegetariano",
     name: "Tacacho Vegetariano",
     description: "Opción 100% vegetal con verduras frescas, quinoa y nuestro masato especial sin lácteos",
-    price: 22000,
+    priceSmall: 18000,
+    priceLarge: 26000,
     image: "/vegetarian-tacacho-with-seasonal-vegetables-legume.jpg",
   },
 ]
@@ -67,6 +73,7 @@ const menuItems: MenuItem[] = [
 export function OrderSystem() {
   const [currentStep, setCurrentStep] = useState<"menu" | "checkout">("menu")
   const [cart, setCart] = useState<CartItem[]>([])
+  const [selectedSizes, setSelectedSizes] = useState<Record<string, "small" | "large">>({})
   const [customerData, setCustomerData] = useState<CustomerData>({
     name: "",
     email: "",
@@ -77,34 +84,49 @@ export function OrderSystem() {
     additionalNotes: "",
   })
 
-  const addToCart = (item: MenuItem) => {
-    const existingItem = cart.find((cartItem) => cartItem.id === item.id)
+  const addToCart = (item: MenuItem, size: "small" | "large") => {
+    const existingItem = cart.find((cartItem) => cartItem.id === item.id && cartItem.size === size)
     if (existingItem) {
       setCart(
-        cart.map((cartItem) => (cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem)),
+        cart.map((cartItem) => 
+          cartItem.id === item.id && cartItem.size === size 
+            ? { ...cartItem, quantity: cartItem.quantity + 1 } 
+            : cartItem
+        ),
       )
     } else {
-      setCart([...cart, { ...item, quantity: 1 }])
+      setCart([...cart, { ...item, quantity: 1, size }])
     }
   }
 
-  const removeFromCart = (itemId: string) => {
-    const existingItem = cart.find((cartItem) => cartItem.id === itemId)
+  const removeFromCart = (itemId: string, size: "small" | "large") => {
+    const existingItem = cart.find((cartItem) => cartItem.id === itemId && cartItem.size === size)
     if (existingItem && existingItem.quantity > 1) {
       setCart(
-        cart.map((cartItem) => (cartItem.id === itemId ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem)),
+        cart.map((cartItem) => 
+          cartItem.id === itemId && cartItem.size === size 
+            ? { ...cartItem, quantity: cartItem.quantity - 1 } 
+            : cartItem
+        ),
       )
     } else {
-      setCart(cart.filter((cartItem) => cartItem.id !== itemId))
+      setCart(cart.filter((cartItem) => !(cartItem.id === itemId && cartItem.size === size)))
     }
   }
 
-  const updateItemNotes = (itemId: string, notes: string) => {
-    setCart(cart.map((cartItem) => (cartItem.id === itemId ? { ...cartItem, notes } : cartItem)))
+  const updateItemNotes = (itemId: string, size: "small" | "large", notes: string) => {
+    setCart(cart.map((cartItem) => 
+      cartItem.id === itemId && cartItem.size === size 
+        ? { ...cartItem, notes } 
+        : cartItem
+    ))
   }
 
   const getTotalPrice = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0)
+    return cart.reduce((total, item) => {
+      const price = item.size === "large" ? item.priceLarge : item.priceSmall
+      return total + price * item.quantity
+    }, 0)
   }
 
   const getTotalItems = () => {
@@ -170,18 +192,21 @@ export function OrderSystem() {
                 <CardTitle>Resumen del Pedido</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {cart.map((item) => (
-                  <div key={item.id} className="flex justify-between items-start">
-                    <div className="flex-1">
-                      <h4 className="font-medium">{item.name}</h4>
-                      <p className="text-sm text-muted-foreground">
-                        Cantidad: {item.quantity} × {formatPrice(item.price)}
-                      </p>
-                      {item.notes && <p className="text-sm text-muted-foreground italic">Nota: {item.notes}</p>}
+                {cart.map((item) => {
+                  const price = item.size === "large" ? item.priceLarge : item.priceSmall
+                  return (
+                    <div key={`${item.id}-${item.size}`} className="flex justify-between items-start">
+                      <div className="flex-1">
+                        <h4 className="font-medium">{item.name} - {item.size === "large" ? "Grande" : "Pequeño"}</h4>
+                        <p className="text-sm text-muted-foreground">
+                          Cantidad: {item.quantity} × {formatPrice(price)}
+                        </p>
+                        {item.notes && <p className="text-sm text-muted-foreground italic">Nota: {item.notes}</p>}
+                      </div>
+                      <p className="font-medium">{formatPrice(price * item.quantity)}</p>
                     </div>
-                    <p className="font-medium">{formatPrice(item.price * item.quantity)}</p>
-                  </div>
-                ))}
+                  )
+                })}
                 <Separator />
                 <div className="flex justify-between items-center text-lg font-bold">
                   <span>Total:</span>
@@ -277,7 +302,9 @@ export function OrderSystem() {
     <section id="pedido" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Haz tu Pedido</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <span className="text-accent block">Haz tu Pedido</span>
+          </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
             Selecciona tus platos favoritos y personaliza tu pedido
           </p>
@@ -300,54 +327,112 @@ export function OrderSystem() {
         {/* Menú de Platos */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {menuItems.map((item) => {
-            const cartItem = cart.find((cartItem) => cartItem.id === item.id)
-            const quantity = cartItem?.quantity || 0
+            const selectedSize = selectedSizes[item.id] || "small"
+            const cartItemSmall = cart.find((cartItem) => cartItem.id === item.id && cartItem.size === "small")
+            const cartItemLarge = cart.find((cartItem) => cartItem.id === item.id && cartItem.size === "large")
+            const cartItemSelected = cart.find((cartItem) => cartItem.id === item.id && cartItem.size === selectedSize)
+            const quantitySmall = cartItemSmall?.quantity || 0
+            const quantityLarge = cartItemLarge?.quantity || 0
+            const quantitySelected = cartItemSelected?.quantity || 0
+            const totalQuantity = quantitySmall + quantityLarge
 
             return (
-              <Card key={item.id} className="overflow-hidden">
-                <div className="aspect-video relative">
+              <Card key={item.id} className="overflow-hidden flex flex-col h-full">
+                <div className="h-80 relative">
                   <img src={item.image || "/placeholder.svg"} alt={item.name} className="w-full h-full object-cover" />
-                  {quantity > 0 && (
-                    <Badge className="absolute top-2 right-2 bg-primary text-primary-foreground">{quantity}</Badge>
+                  {totalQuantity > 0 && (
+                    <Badge className="absolute top-2 right-2 bg-primary text-primary-foreground">{totalQuantity}</Badge>
                   )}
                 </div>
-                <CardContent className="p-6">
-                  <div className="flex justify-between items-start mb-4">
+                <CardContent className="p-6 flex flex-col flex-grow">
+                  <div className="flex justify-between items-start mb-4 flex-grow">
                     <div className="flex-1">
                       <h3 className="text-xl font-bold text-card-foreground mb-2">{item.name}</h3>
-                      <p className="text-muted-foreground text-sm mb-4">{item.description}</p>
-                      <p className="text-2xl font-bold text-primary">{formatPrice(item.price)}</p>
+                      <p className="text-muted-foreground text-sm mb-4 line-clamp-3">{item.description}</p>
+                      
+                      {/* Selector de tamaño */}
+                      <div className="mb-4">
+                        <label className="text-sm font-medium mb-2 block">Selecciona el tamaño:</label>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => setSelectedSizes({...selectedSizes, [item.id]: "small"})}
+                            className={`flex-1 p-3 rounded-lg border-2 transition-all ${
+                              selectedSize === "small" 
+                                ? "border-primary bg-primary/10 text-primary" 
+                                : "border-border hover:border-primary/50"
+                            }`}
+                          >
+                            <div className="text-center">
+                              <div className="font-medium">Pequeño</div>
+                              <div className="text-sm font-bold">{formatPrice(item.priceSmall)}</div>
+                              {quantitySmall > 0 && (
+                                <div className="text-xs mt-1 text-primary">({quantitySmall} en carrito)</div>
+                              )}
+                            </div>
+                          </button>
+                          <button
+                            onClick={() => setSelectedSizes({...selectedSizes, [item.id]: "large"})}
+                            className={`flex-1 p-3 rounded-lg border-2 transition-all ${
+                              selectedSize === "large" 
+                                ? "border-primary bg-primary/10 text-primary" 
+                                : "border-border hover:border-primary/50"
+                            }`}
+                          >
+                            <div className="text-center">
+                              <div className="font-medium">Grande</div>
+                              <div className="text-sm font-bold">{formatPrice(item.priceLarge)}</div>
+                              {quantityLarge > 0 && (
+                                <div className="text-xs mt-1 text-primary">({quantityLarge} en carrito)</div>
+                              )}
+                            </div>
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
-                  {quantity > 0 && (
+                  {/* Notas para el tamaño seleccionado */}
+                  {quantitySelected > 0 && (
                     <div className="mb-4">
+                      <label className="text-xs text-muted-foreground">
+                        Notas para {selectedSize === "large" ? "tamaño grande" : "tamaño pequeño"}:
+                      </label>
                       <Textarea
-                        placeholder="Notas especiales para este plato (opcional)"
-                        value={cartItem?.notes || ""}
-                        onChange={(e) => updateItemNotes(item.id, e.target.value)}
+                        placeholder="Notas especiales (opcional)"
+                        value={cartItemSelected?.notes || ""}
+                        onChange={(e) => updateItemNotes(item.id, selectedSize, e.target.value)}
                         rows={2}
-                        className="text-sm"
+                        className="text-sm mt-1"
                       />
                     </div>
                   )}
 
-                  <div className="flex items-center justify-between">
-                    {quantity === 0 ? (
+                  {/* Controles de cantidad para el tamaño seleccionado */}
+                  <div className="mt-auto">
+                    <div className="text-center mb-3">
+                      <p className="text-lg font-bold text-primary">
+                        {selectedSize === "large" ? formatPrice(item.priceLarge) : formatPrice(item.priceSmall)}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        Tamaño {selectedSize === "large" ? "Grande" : "Pequeño"} seleccionado
+                      </p>
+                    </div>
+                    
+                    {quantitySelected === 0 ? (
                       <Button
-                        onClick={() => addToCart(item)}
+                        onClick={() => addToCart(item, selectedSize)}
                         className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
                       >
                         <Plus className="w-4 h-4 mr-2" />
                         Agregar al Carrito
                       </Button>
                     ) : (
-                      <div className="flex items-center justify-between w-full">
-                        <Button variant="outline" size="sm" onClick={() => removeFromCart(item.id)}>
+                      <div className="flex items-center justify-between">
+                        <Button variant="outline" size="sm" onClick={() => removeFromCart(item.id, selectedSize)}>
                           <Minus className="w-4 h-4" />
                         </Button>
-                        <span className="mx-4 font-medium text-lg">{quantity}</span>
-                        <Button variant="outline" size="sm" onClick={() => addToCart(item)}>
+                        <span className="mx-4 font-medium text-lg">{quantitySelected}</span>
+                        <Button variant="outline" size="sm" onClick={() => addToCart(item, selectedSize)}>
                           <Plus className="w-4 h-4" />
                         </Button>
                       </div>

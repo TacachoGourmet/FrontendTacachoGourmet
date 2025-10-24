@@ -32,23 +32,13 @@ export function Footer() {
             <h4 className="font-semibold mb-4 text-primary">Enlaces Rápidos</h4>
             <ul className="space-y-2 text-background/80">
               <li>
-                <a href="#inicio" className="hover:text-primary transition-colors">
+                <a href="inicio" className="hover:text-primary transition-colors">
                   Inicio
                 </a>
               </li>
               <li>
-                <a href="#menu" className="hover:text-primary transition-colors">
-                  Menú
-                </a>
-              </li>
-              <li>
-                <a href="#nosotros" className="hover:text-primary transition-colors">
-                  Nosotros
-                </a>
-              </li>
-              <li>
-                <a href="#contacto" className="hover:text-primary transition-colors">
-                  Contacto
+                <a href="equipo" className="hover:text-primary transition-colors">
+                  Equipo
                 </a>
               </li>
             </ul>
