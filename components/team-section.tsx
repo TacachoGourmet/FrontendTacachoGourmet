@@ -9,7 +9,7 @@ const teamMembers = [
 		name: "ANA MARIA MARTINEZ",
 		role: "Chef Ejecutiva & Co-fundadora",
 		description:
-			"Especialista en cocina amazónica tradicional con más de 15 años de experiencia. Ana María es la mente creativa detrás de nuestras recetas gourmet.",
+			"Especialista en cocina amazónica tradicional con más de 5 años de experiencia.Ana María es la mente creativa detrás de nuestras recetas gourmet, fusionando sabores ancestrales con un toque moderno. Su pasión por los ingredientes locales la ha llevado a destacar en la creación del Tacacho Gourmet, una exquisita canasta de patacón rellena de ingredientes autóctonos de Boyacá. Este plato refleja su compromiso con la sostenibilidad y la riqueza cultural de la región, ofreciendo a los comensales una experiencia única que combina tradición y sofisticación.",
 		expertise: ["Cocina Amazónica", "Innovación Culinaria", "Gestión de Cocina"],
 		image: "/professional-chef-woman-smiling-in-kitchen.jpg",
 	},
@@ -17,7 +17,7 @@ const teamMembers = [
 		name: "MANUELA NOY",
 		role: "Directora de Operaciones & Co-fundadora",
 		description:
-			"Experta en gestión gastronómica y experiencia del cliente. Manuela asegura que cada aspecto de nuestro servicio refleje la excelencia.",
+			"Experta en gestión gastronómica, administración y experiencia del cliente, se encarga de supervisar minuciosamente cada etapa del proceso operativo, desde la planificación de la producción hasta la presentación final de los productos. Su labor se centra en garantizar la eficiencia en las operaciones, la calidad en cada detalle y la excelencia en el servicio. Gracias a su liderazgo estratégico, coordina los equipos de trabajo, impulsa la mejora continua y promueve una cultura de compromiso y responsabilidad. Además, vela porque cada producto conserve los más altos estándares de sabor, presentación e higiene, asegurando que la experiencia del cliente sea siempre excepcional, memorable y refleje los valores de la empresa.",
 		expertise: ["Gestión Operativa", "Experiencia Cliente", "Desarrollo de Negocio"],
 		image: "/professional-business-woman-smiling-in-restaurant.jpg",
 	},
@@ -25,7 +25,7 @@ const teamMembers = [
 		name: "MIGUEL MALAGÓN",
 		role: "Chef de Innovación & Co-fundador",
 		description:
-			"Pionero en la fusión de técnicas modernas con sabores tradicionales. Miguel lidera el desarrollo de nuevos productos y presentaciones.",
+			"Encarna la fusión perfecta entre la creatividad culinaria y la visión estratégica del negocio. En su rol de chef, es el arquitecto del sabor, responsable de investigar, experimentar y desarrollar el concepto culinario único que diferencia a la marca, garantizando la calidad y consistencia de cada plato. Simultáneamente, como co-fundador, es un socio estratégico que participa activamente en las decisiones clave del negocio, desde el modelo operativo y el branding hasta la planificación financiera, contribuyendo a moldear la cultura e identidad de la empresa desde sus cimientos. Este doble cargo lo posiciona como un líder multitarea cuyo día a día transita entre la creación en la cocina y la gestión en la mesa directiva, siempre con la misión de transformar su pasión gastronómica en un emprendimiento sostenible y exitoso.",
 		expertise: ["Técnicas Modernas", "Desarrollo de Producto", "Fusión Culinaria"],
 		image: "/professional-male-chef-smiling-in-modern-kitchen.jpg",
 	},
