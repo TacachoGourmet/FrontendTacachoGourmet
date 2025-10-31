@@ -192,7 +192,7 @@ export function OrderSystem() {
     e.preventDefault()
     
     // Número de WhatsApp de la empresa (reemplaza con el número real)
-    const whatsappNumber = "573212827709" // Formato: código país + número sin espacios ni símbolos
+    const whatsappNumber = "573142532429" // Formato: código país + número sin espacios ni símbolos
     
     const message = generateWhatsAppMessage()
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
@@ -352,7 +352,7 @@ export function OrderSystem() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            <span className="text-accent block">Haz tu Pedido</span>
+            <span className="text-white block bg-primary">Menú</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
             Selecciona tus platos favoritos y personaliza tu pedido
