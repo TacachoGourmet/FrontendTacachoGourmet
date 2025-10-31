@@ -39,15 +39,15 @@ const menuItems: MenuItem[] = [
   {
     id: "mix-carne",
     name: "Tacacho Mix de Carne",
-    description: "Deliciosa combinación de carne de res, pollo y pescado con plátano verde machacado y masato cremoso",
+    description: "Disfruta de una explosión de sabores con nuestro tacacho artesanal, relleno de una suculenta combinación de cerdo jugoso y res tierna, cocinados a la perfección para resaltar su sabor. Coronado con queso fundido a tu elección, que se derrite en cada bocado, acompañado de crujientes chips de arracacha y con nuestra exclusiva salsa artesanal de la casa. Una explosión de sabores que hará de cada mordida una experiencia inolvidable.",
     priceSmall: 24000,
     priceLarge: 32000,
     image: "/tacacho-with-mixed-meats-beef-chicken-fish-colorfu.jpg",
   },
   {
-    id: "champinones",
-    name: "Tacacho de Champiñones",
-    description: "Exquisita variación vegetariana con champiñones frescos, plátano verde y nuestra salsa especial",
+    id: "camarones",
+    name: "Tacacho de Camarones",
+    description: "Nuestra estrella culinaria, un tacacho artesanal relleno de camarones bañados en una salsa especial de la casa. Coronado con queso fundido a tu elección, que se derrite en cada bocado, y acompañado de crujientes chips de arracacha que aportan un contraste perfecto. Una explosión de sabores marinos y rústicos que hará de cada mordida una experiencia inolvidable.",
     priceSmall: 20000,
     priceLarge: 28000,
     image: "/tacacho-with-fresh-mushrooms-herbs-vegetarian-amaz.jpg",
@@ -55,7 +55,7 @@ const menuItems: MenuItem[] = [
   {
     id: "ranchero",
     name: "Tacacho Ranchero",
-    description: "Estilo campesino con carne de cerdo, chorizo criollo y el auténtico sabor de la selva",
+    description: "Deléitate con nuestro tacacho rústico, relleno de una jugosa mezcla de salchicha artesanal y chorizo ahumado, combinados con maíz tierno dulce y un toque audaz de jalapeños frescos. Coronado con queso fundido a tu elección, que se derrite en cada bocado, acompañado de crujientes chips de arracacha y con nuestra exclusiva salsa artesanal de la casa. Una explosión de sabores que hará de cada mordida una experiencia inolvidable.",
     priceSmall: 22000,
     priceLarge: 30000,
     image: "/tacacho-ranchero-style-with-marinated-beef-fresh-v.jpg",
@@ -63,7 +63,7 @@ const menuItems: MenuItem[] = [
   {
     id: "vegetariano",
     name: "Tacacho Vegetariano",
-    description: "Opción 100% vegetal con verduras frescas, quinoa y nuestro masato especial sin lácteos",
+    description: "Una delicia 100% vegetal que combina la jugosidad de champiñones salteados, la dulzura del maíz tierno y un vibrante mix de verduras frescas, todo envuelto en nuestro tacacho artesanal. Coronado con queso fundido a tu elección, que se derrite en cada bocado, acompañado de crujientes chips de arracacha y con nuestra exclusiva salsa artesanal de la casa. Una explosión de sabores que hará de cada mordida una experiencia inolvidable",
     priceSmall: 18000,
     priceLarge: 26000,
     image: "/vegetarian-tacacho-with-seasonal-vegetables-legume.jpg",
@@ -140,18 +140,67 @@ export function OrderSystem() {
     })
   }
 
+  const generateWhatsAppMessage = () => {
+    const currentDate = new Date().toLocaleDateString('es-CO', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    })
+
+    let message = `*NUEVO PEDIDO - TACACHO GOURMET*\n\n`
+    message += `*FECHA:* ${currentDate}\n\n`
+    
+    message += `*DATOS DEL CLIENTE:*\n`
+    message += `• *Nombre:* ${customerData.name}\n`
+    message += `• *Teléfono:* ${customerData.phone}\n`
+    message += `• *Email:* ${customerData.email}\n\n`
+
+    message += `*DIRECCIÓN DE ENTREGA:*\n`
+    message += `• *Dirección:* ${customerData.address}\n`
+    message += `• *Ciudad:* ${customerData.city}\n`
+    message += `• *Barrio:* ${customerData.neighborhood}\n`
+    if (customerData.additionalNotes) {
+      message += `• *Notas adicionales:* ${customerData.additionalNotes}\n`
+    }
+    message += `\n`
+
+    message += `*DETALLE DEL PEDIDO:*\n`
+    cart.forEach((item, index) => {
+      const price = item.size === "large" ? item.priceLarge : item.priceSmall
+      const sizeText = item.size === "large" ? "Grande" : "Pequeño"
+      message += `${index + 1}. *${item.name}* (${sizeText})\n`
+      message += `   *Cantidad:* ${item.quantity}\n`
+      message += `   *Precio unitario:* ${formatPrice(price)}\n`
+      message += `   *Subtotal:* ${formatPrice(price * item.quantity)}\n`
+      if (item.notes) {
+        message += `   *Notas:* ${item.notes}\n`
+      }
+      message += `\n`
+    })
+
+    message += `*TOTAL A PAGAR:* ${formatPrice(getTotalPrice())}\n\n`
+    message += `¡Gracias por elegir Tacacho Gourmet!\n`
+    message += `Te contactaremos pronto para confirmar tu pedido.`
+
+    return message
+  }
+
   const handleSubmitOrder = (e: React.FormEvent) => {
     e.preventDefault()
-    const orderData = {
-      items: cart,
-      customer: customerData,
-      total: getTotalPrice(),
-      timestamp: new Date().toISOString(),
-    }
-    console.log("Pedido enviado:", orderData)
-    alert("¡Pedido enviado exitosamente! Te contactaremos pronto para confirmar la entrega.")
+    
+    // Número de WhatsApp de la empresa (reemplaza con el número real)
+    const whatsappNumber = "573212827709" // Formato: código país + número sin espacios ni símbolos
+    
+    const message = generateWhatsAppMessage()
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
+    
+    // Abrir WhatsApp en una nueva pestaña
+    window.open(whatsappUrl, '_blank')
 
-    // Reset form
+    // Reset form después de enviar
     setCart([])
     setCustomerData({
       name: "",
