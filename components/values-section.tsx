@@ -36,16 +36,20 @@ function ValueCard({ icon: Icon, title, description, className = "" }: {
 }) {
   return (
     <div className={`max-w-[280px] ${className}`}>
-      <div className="p-6 rounded-xl bg-white/70 backdrop-blur-md shadow-xl border border-primary hover:bg-white/90 hover:shadow-2xl hover:scale-105 transition-all duration-300 group cursor-pointer">
+      {/* contenedor con altura mínima y stretch para que todas las tarjetas queden iguales */}
+      <div className="p-6 rounded-xl bg-white/70 backdrop-blur-md shadow-xl border border-primary hover:bg-white/90 hover:shadow-2xl hover:scale-105 transition-all duration-300 group cursor-pointer h-full min-h-[180px] flex flex-col">
         <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-secondary to-secondary/80 text-secondary-foreground rounded-full mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
           <Icon size={24} />
         </div>
-        <h3 className="text-lg font-bold text-primary mb-2 leading-tight">
-          {title}
-        </h3>
-        <p className="text-sm text-muted-foreground leading-relaxed">
-          {description}
-        </p>
+
+        <div className="flex-1">
+          <h3 className="text-lg font-bold text-primary mb-2 leading-tight">
+            {title}
+          </h3>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            {description}
+          </p>
+        </div>
       </div>
     </div>
   );
@@ -63,6 +67,22 @@ export function ValuesSection() {
             Los principios que guían cada aspecto de nuestra cocina y servicio,
             desde la selección de ingredientes hasta la experiencia del cliente.
           </p>
+        </div>
+
+        {/* --- Nuevas tarjetas: Visión y Misión (justo debajo de la descripción) --- */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12">
+          <ValueCard
+            icon={Lightbulb}
+            title="Visión"
+            description="Ser reconocidos como líderes en la gastronomía fusión amazónica, destacando por nuestra creatividad, calidad y compromiso con la tradición. Aspiramos a expandir nuestra presencia a nivel nacional e internacional, convirtiendo el Tacacho Gourmet en un símbolo de innovación y orgullo cultural."
+            className="text-center max-w-[420px] h-[360px]"
+          />
+          <ValueCard
+            icon={Sparkles}
+            title="Misión"
+            description="Ofrecemos una experiencia gastronómica única que fusiona la autenticidad de la tradición amazónica con innovación gourmet, utilizando ingredientes frescos y técnicas modernas. Nuestro objetivo es deleitar a los comensales con sabores excepcionales, promover la cultura culinaria amazónica y contribuir al desarrollo sostenible de las comunidades locales."
+            className="text-center max-w-[420px] h-[360px]"
+          />
         </div>
 
         {/* 4. Contenedor principal con Flexbox */}
