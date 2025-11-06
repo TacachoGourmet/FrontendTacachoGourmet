@@ -43,25 +43,6 @@ export function Footer() {
               </li>
             </ul>
           </div>
-
-          {/* Redes Sociales */}
-          <div>
-            <h4 className="font-semibold mb-4 text-primary">Síguenos</h4>
-            <div className="flex space-x-4">
-              <a href="#" className="text-background/80 hover:text-primary transition-colors">
-                <Facebook size={24} />
-              </a>
-              <a href="#" className="text-background/80 hover:text-primary transition-colors">
-                <Instagram size={24} />
-              </a>
-              <a href="#" className="text-background/80 hover:text-primary transition-colors">
-                <Twitter size={24} />
-              </a>
-              <a href="#" className="text-background/80 hover:text-primary transition-colors">
-                <Youtube size={24} />
-              </a>
-            </div>
-          </div>
         </div>
 
         <div className="border-t border-background/20 mt-8 pt-8 text-center text-background/60">

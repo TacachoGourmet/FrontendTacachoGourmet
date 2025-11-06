@@ -64,7 +64,7 @@ const menuItems: MenuItem[] = [
     id: "vegetariano", 
     name: "Tacacho Vegetariano",
     description: "Una delicia 100% vegetal que combina la jugosidad de champiñones salteados, la dulzura del maíz tierno y un vibrante mix de verduras frescas, todo envuelto en nuestro tacacho artesanal. Coronado con queso fundido a tu elección, que se derrite en cada bocado, acompañado de crujientes chips de arracacha y con nuestra exclusiva salsa artesanal de la casa. Una explosión de sabores que hará de cada mordida una experiencia inolvidable",
-    priceSmall: 4500,
+    priceSmall: 6000,
     priceLarge: 22000,
     image: "/vegetarian-tacacho-with-seasonal-vegetables-legume.jpg",
   },
@@ -192,7 +192,7 @@ export function OrderSystem() {
     e.preventDefault()
     
     // Número de WhatsApp de la empresa (reemplaza con el número real)
-    const whatsappNumber = "573142532429" // Formato: código país + número sin espacios ni símbolos
+    const whatsappNumber = "573132769992" // Formato: código país + número sin espacios ni símbolos
     
     const message = generateWhatsAppMessage()
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
